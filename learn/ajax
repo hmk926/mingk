@@ -1,0 +1,14 @@
+var xhr = new XMLHttpRequest();
+    xhr.onreadychange = function(){
+      if(xhr.readyState == 4 ){
+        if(xhr.status >= 200 && xhr.status < 300 || xhr.status == 304){
+          alert(xhr.responseText);
+        }else{
+          alert("responseText was unsuccessful:"+xhr.status)
+        }
+      }
+    };
+    
+    xhr.open("post","db.jsp",true);
+    xhr.setRequestHeader("Content-Type","url");
+    xhr.send(data);
