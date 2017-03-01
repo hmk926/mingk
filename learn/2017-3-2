@@ -1,0 +1,40 @@
+    //写一个mul函数调用时将生成以下输出:
+
+    //console.log(mul(2)(3)(4)); // output : 24 
+
+    //console.log(mul(4)(3)(4)); // output : 48
+    
+    
+    //way1:from zhihu
+    
+    function mul(x) {
+          const result = (y) => mul(x * y);       //const是Es6新语法 换成var或let也可以 (y) => mul(x * y) = funtion(y){return mul(x * y)}
+          result.valueOf = () => x;               //lambda表达式 es6新语法，（）=> x  = function(){return x}
+          return result;
+    }
+    
+    console.log(mul(3))
+    -> 3
+    console.log(mul(3)(2))
+    -> 6
+    console.log(mul(3)(2)(4))
+    -> 24
+    console.log(mul(3)(2)(4)(5))
+    -> 120
+    
+    
+    //myway:使用闭包
+    
+    function mul(x){
+      function result(y){
+          return mul(x * y)
+        }
+        
+      result.valueof = function（）{
+          return x;
+        }
+      return result;
+      
+     }
+    
+    
