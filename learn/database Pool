@@ -1,0 +1,42 @@
+
+var mysql = require('mysql');
+
+var config = {
+    
+    host:'',
+    port:3306,
+    database:'myweb',
+    user:'',
+    password:''
+};
+
+//创建连接池
+var pool = mysql.createPool(config);
+
+/**
+ *
+ * @param sql 执行sql
+ * @param paramas   sql中的参数
+ * @param callback  回调函数
+ */
+var query = function (sql,params,callback) {
+
+    //从连接池中获取一个连接
+    pool.getConnection(function (err,connection) {
+
+        if(err)
+            return console.log('创建数据库连接失败,',err);
+
+        //执行sql语句
+        connection.query(sql,params,function (err,result) {
+            if(err) return console.log('数据库查询失败,',err);
+            //调用回调函数,传入查询结果
+            callback(result);
+
+            //释放连接对象
+            connection.release();
+        })
+    });
+}
+
+module.exports = query;
