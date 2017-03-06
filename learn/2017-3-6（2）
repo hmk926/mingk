@@ -1,0 +1,155 @@
+for(var i = 0; i<3;i++){}
+i
+3
+
+0 == false
+true
+
+0 == true
+false
+
+0 == []
+true
+
+0 == ""
+true
+
+0 == null
+false
+
+0 == undefined
+false
+
+"" == ""
+true
+
+"" == []
+true
+
+1e+1
+10
+
+1e1
+10
+
+1e2
+100
+
+2e+1
+20
+
+2e+5
+200000
+
+typeof []
+"object"
+
+typeof null
+"object"
+
+typeof undefined
+"undefined"
+
+undefined == null
+true
+
+undefined === null
+false
+
+undefined == NaN
+false
+
+undefined === NaN
+false
+
+null == NaN
+false
+
+null === NaN
+false
+8
+NaN == NaN
+false
+
+0 == NaN
+false
+
+"666" == NaN
+false
+
+"123" == NaN
+false
+
+123 == NaN
+false
+
+typeof NaN
+"number"
+
+var a = NaN
+undefined
+a
+NaN
+
+
+var list1 = [2,3]
+var list2;
+
+list2 = list1;
+//[2, 3]
+list2[1] += "1";
+//"31"
+list2.join(0)
+//"2,31"
+
+var result = "";
+if(typeof somevar !== "undefined"){
+    result = "yes";
+}
+result
+""
+
+var result = "",somevar = "123";
+if(typeof somevar !== "undefined"){
+    result = "yes";
+}
+"yes"
+
+var a = 1;
+var result = "";
+if(a === 1){
+    result = "a is one";
+}else{
+    result = "a is not one"
+}
+"a is one"
+
+//简化
+var a = 1;
+var result = (a === 1)?"a is one" : "a is not one";
+
+var nb = nb ||10;
+nb
+10
+
+var nb1 =nb1 || 100;
+nb1
+100
+
+var nb2 = nb2 || 0;
+nb2
+0
+
+var nb3 = nb3 || null;
+nb3
+null
+
+for( var a = 1; a < 10; a++ )
+{
+    for( var b = 1; b <= a; b++ )
+    {
+        document.write( b + "x" + a + "=" + a*b );
+        document.write( " " );
+    }
+    document.write( "<br />" );
+}
