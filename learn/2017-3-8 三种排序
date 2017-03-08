@@ -1,0 +1,52 @@
+//冒泡排序
+var arr;
+
+arr = [12,16,40,68,79,80,5,18,23,50];
+
+(function maopao() {
+    for (var i = 0; i < arr.length - 1; i++) {
+        for (var j = 0; j < arr.length - 1 - i; j++) {
+                if(arr[j]>arr[j+1]){
+                    var temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                }
+        }
+    }
+    console.log(arr);
+})();
+
+//选择排序
+arr = [12,16,40,68,79,80,5,18,23,50];
+
+(function xuanze(){
+    var min,temp; //min = 最小的索引
+    for(var i=0;i<arr.length-1;i++){
+        min = i;
+        for(var j= i+1;j<arr.length;j++){   //这里的arr.length不是arr.length-1,因为导致倒数第二个数没法参与排序
+            if(arr[j]<arr[min]){
+                min = j;
+            }
+            temp = arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp;
+        }
+    }
+console.log(arr);
+})();
+
+//插入排序
+arr = [12,16,40,68,79,80,5,18,23,50];
+
+(function charu() {
+    for(var i = 1;i<arr.length;i++){
+        var temp = arr[i];
+        var j = i;
+        while (arr[j-1]>temp){
+            arr[j] = arr[j-1];
+            --j;
+        }
+        arr[j] = temp;
+    }
+    console.log(arr);
+})();
