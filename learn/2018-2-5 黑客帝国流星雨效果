@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文字瀑布</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        canvas {
+            background-color: #0a0a0a;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+</body>
+<script>
+    (function(){
+        //获取画布
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        //获取浏览器宽度与高度
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        //设置画布宽高等于浏览器宽高
+        canvas.width = width;
+        canvas.height = height;
+        //设置文字大小
+        var fontSize = 18;
+        //计算列数
+        var columnNum = Math.floor(width / fontSize);
+        //创建输组，存放每列文字的Y坐标
+        var arr = [];
+        //给文字初始化位置
+        for(var i = 0;i < columnNum;i++){
+            arr.push(0);
+        }
+
+
+        //文字 65-122对应字母A-z;
+        var str = [];
+        for(var j = 65; j < 91; j ++){
+            str.push(String.fromCharCode(j))
+        }
+        // str =  String.fromCharCode(65 + Math.ceil(Math.random()*57));
+
+        function draw(){
+            context.fillStyle = 'rgba(0,0,0,0.05)';
+            context.fillRect(0,0,width,height);
+            //字体颜色
+            context.fillStyle ="#00cc33";
+            //给字体设置样式
+            context.font = "600 "+fontSize+"px  微软雅黑";
+            //写入画布中
+            for(var k = 0;k < columnNum;k++){
+                //随机位置下表
+                var index = Math.floor(Math.random() * str.length);
+                var x = k*fontSize;
+                var y = arr[k] *fontSize;
+                context.fillText(str[index],x,y);
+                //如果要改变时间，肯定就是改变每次他的起点
+
+                if(y >= canvas.height && Math.random() > 0.99){
+                    arr[k] = 0;
+                }
+                arr[k]++;
+            }
+
+
+        }
+
+        setInterval(draw,30);
+
+    })();
+
+
+
+
+
+</script>
+</html>
