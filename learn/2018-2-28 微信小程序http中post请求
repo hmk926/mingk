@@ -1,0 +1,75 @@
+function httpReq(url, data, callback) {
+  wx.request({
+    url:url,
+    data: data,
+    method: 'post',
+    header: { 'Content-Type': 'application/json' },
+    success: function (res) {
+      return typeof callback == "function" && callback(res.data)
+    },
+    fail: function () {
+      return typeof callback == "function" && callback(false)
+    }
+  })
+}
+
+
+module.exports = {
+  httpReq: httpReq
+}  
+//module.exports 对象是由模块系统创建的。
+在我们自己写模块的时候，需要在模块最后写好模块接口，声明这个模块对外暴露什么内容，module.exports 提供了暴露接口的方法。
+
+这里有个坑得注意一下，这种请求GET方式是ok的，header头也可以不用添加。
+但是POST就有比较大的问题了。POST 请求会将data的值放在Request Payload里面，而不是Query String Parameters里面，后端服务器如果不注意，就无法取到数据。
+改法：post请求中的header将json改为x-www-form-urlencoded ，为'application/x-www-form-urlencoded'；
+修改header的确请求到了数据，但是这种方法完全违背了header的理念，get请求才应该将数据挂在url后面，
+而post请求所发送的数据会有可能超出query string形式的长度限制。
+网上有说content-type写成小写时post请求可以成功，但是本人测试无效。
+---------------------------------------------------------------------------------------------------------------
+最后在app.js中全局注册该对象，再每个文件内都可以共用func，
+
+var http = require('http/http.js')  
+
+App({
+  onLaunch: function () {
+    // 展示本地存储能力
+    var logs = wx.getStorageSync('logs') || []
+    logs.unshift(Date.now())
+    wx.setStorageSync('logs', logs)
+
+    // 登录
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      }
+    })
+    // 获取用户信息
+    wx.getSetting({
+      success: res => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          wx.getUserInfo({
+            success: res => {
+              // 可以将 res 发送给后台解码出 unionId
+              this.globalData.userInfo = res.userInfo
+
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
+              }
+            }
+          })
+        }
+      }
+    })
+  },
+  globalData: {
+    userInfo: null
+  },
+  func:{
+    httpReq:http.httpReq
+  },
+
+})
