@@ -1,0 +1,69 @@
+{
+  // 项目路由设置（第一项为首页）
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  // 窗口设置
+  "window":{
+    // 顶部导航栏背景色，必须是十六进制颜色值，如"#000000"
+    "navigationBarBackgroundColor": "#9ef468",
+    // 顶部导航栏显示文字
+    "navigationBarTitleText": "组件展示",
+    // 导航栏文字颜色，仅支持 black/white
+    "navigationBarTextStyle": "black",
+    // 下拉背景的文字样式，仅支持 dark/light
+    "backgroundTextStyle":"light",
+    // 下拉背景色，必须是十六进制颜色值，如"#000000"
+    "backgroundColor": "#333",
+    // 是否开启下拉刷新
+    "enablePullDownRefresh": true,
+    // 距离最底端触多少距离时触发触底事件，单位px
+    "onReachBottomDistance": 40
+  },
+  //网络请求过期时间，单位毫秒
+  "networkTimeout": {
+    // 普通ajax请求
+    "request": 20000,
+    // Socket请求
+    "connectSocket": 20000,
+    // 文件上传
+    "uploadFile": 20000,
+    // 文件下载
+    "downloadFile": 20000
+  },
+  // tab导航栏
+  "tabBar": {
+    // 文字的颜色
+    "color": "#999",
+    // 选中时文字的颜色
+    "selectedColor": "#000",
+    // 背景色
+    "backgroundColor": "#fff",
+    // 上边框的颜色，仅支持 black/white
+    "borderStyle": "black",
+    // tab导航栏显示在底部还是顶部(顶部不显示图片)
+    "position": "bottom",
+    // 导航栏列表项
+    "list": [{
+      // 导航到的页面路径
+      "pagePath": "pages/index/index",
+      // tab按钮上的文字
+      "text": "组件",
+      // 图片路径
+      "iconPath": "img/com-l.png",
+      // 选中后显示的图片
+      "selectedIconPath": "img/com-d.png"
+    },{
+      "pagePath": "pages/logs/logs",
+      "text": "API",
+      "iconPath": "img/api-l.png",
+      "selectedIconPath": "img/api-d.png"
+    }]
+  },
+  // 调试信息
+  "debug": true
+}
+
+-------------------------------------------------------------
+单页面的json就是app.json的window字段，当加载到这个页面时，此配置将覆盖app.json
