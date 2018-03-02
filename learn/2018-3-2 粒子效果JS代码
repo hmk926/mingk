@@ -1,0 +1,21 @@
+ var ctx = document.body.appendChild(document.createElement("canvas")).getContext('2d');
+    var i, j, k, a = [], w = ctx.canvas.width = 550, h = ctx.canvas.height = 240, r = Math.random, p = Math.PI;
+    setInterval(function(){
+        ctx.fillStyle = "rgba(0, 0, 0, .5)";
+        ctx.fillRect(0, 0, w, h);
+        i = 10;
+        while(i--){a.push({x:w/2,y:h/6,r:r()*3,c:"#fff",t:0,vx:r()*10-5,vy:r()*-5})}
+        for(i = a.length-1;i >= 0;i--){
+            k = a[i];
+            ctx.fillStyle=k.c;
+            ctx.beginPath();
+            ctx.arc(k.x, k.y, k.r, 0, p*2)
+            ctx.fill();
+            k.x+=k.vx;
+            k.y+=k.vy;
+            k.vy+=.2;
+            k.r -= .01;
+            if(k.y>h){k.y=h;k.vy*=-.5;k.r+=.005;}
+            k.r < 0 && a.splice(i, 1);
+        }
+    }, 17);
